@@ -81,7 +81,6 @@
 "use client";
 import { Select } from "@mantine/core";
 import { useJobStore } from "@/store/useJobStore";
-import { IconChevronDown, IconUserCode } from "@tabler/icons-react";
 
 const jobTypes = ["Full-time", "Part-time", "Contract", "Internship"];
 

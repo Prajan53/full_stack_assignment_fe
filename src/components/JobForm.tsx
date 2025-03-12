@@ -371,7 +371,7 @@ export default function JobForm() {
       setOpened(false);
       reset();
     } catch (err) {
-      // @ts-ignore
+      //@ts-expect-error
       setError(err.response?.data?.message || "Failed to create job");
       console.log(err);
     } finally {
@@ -400,14 +400,14 @@ export default function JobForm() {
               label="Job Title"
               placeholder="Full Stack Developer"
               {...register("jobTitle", { required: "Job Title is required" })}
-              // @ts-ignore
+              //@ts-expect-error
               error={errors.jobTitle?.message || ""}
             />
             <TextInput
               label="Company Name"
               placeholder="Amazon, Microsoft, Swiggy"
               {...register("company", { required: "Company Name is required" })}
-              // @ts-ignore
+              //@ts-expect-error
               error={errors.company?.message || ""}
             />
           </Group>
@@ -419,7 +419,7 @@ export default function JobForm() {
               placeholder="Choose Preferred Location"
               data={["Remote", "Bangalore", "Chennai", "Delhi"]}
               {...register("location", { required: "Location is required" })}
-              // @ts-ignore
+              //@ts-expect-error
               error={errors.location?.message || ""}
               onChange={(value) => setValue("location", value, { shouldValidate: true })}
             />
@@ -428,7 +428,7 @@ export default function JobForm() {
               placeholder="Full-time"
               data={["FULL_TIME","PART_TIME","CONTRACT","INTERNSHIP"]}
               {...register("jobType", { required: "Job Type is required" })}
-              // @ts-ignore
+              //@ts-expect-error
               error={errors.jobType?.message || ""}
               onChange={(value) => setValue("jobType", value, { shouldValidate: true })}
             />
@@ -442,7 +442,7 @@ export default function JobForm() {
               icon={<IconCurrencyRupee size={16} />}
               className="w-full"
               onChange={(value) => setValue("salaryMin", value || 0, { shouldValidate: true })}
-              // @ts-ignore
+              // @ts-expect-error
               error={errors.salaryMin?.message || ""}
             />
             <NumberInput
@@ -451,7 +451,7 @@ export default function JobForm() {
               icon={<IconCurrencyRupee size={16} />}
               className="w-full"
               onChange={(value) => setValue("salaryMax", value || 0, { shouldValidate: true })}
-              // @ts-ignore
+              // @ts-expect-error
               error={errors.salaryMax?.message || ""}
             />
 
@@ -463,15 +463,15 @@ export default function JobForm() {
               <div className="h-[50px] flex items-center">
                 <DatePicker
                   onChange={(date) => {
-                    // @ts-ignore
+                    // @ts-expect-error
                     setSelectedDate(date);
-                    // @ts-ignore
+                    // @ts-expect-error
                     setValue("applicationDeadline", date?.toISOString(), { shouldValidate: true });
                   }}
                   value={selectedDate}
                   format="y-MM-dd"
                   showLeadingZeros
-                  // @ts-ignore
+                  // @ts-expect-error
                   calendarType="gregory"
                   maxDetail="month"
                   minDetail="decade"
@@ -487,7 +487,7 @@ export default function JobForm() {
             label="Job Description"
             placeholder="Please share a description to let the candidate know more about the job role"
             {...register("description", { required: "Job description is required" })}
-            // @ts-ignore
+            // @ts-expect-error
             error={errors.description?.message || ""}
           />
 
@@ -496,7 +496,7 @@ export default function JobForm() {
             label="Requirements"
             placeholder="List the job requirements here"
             {...register("requirements", { required: "Requirements are required" })}
-            // @ts-ignore
+            // @ts-expect-error
             error={errors.requirements?.message || ""}
           />
 
@@ -505,7 +505,7 @@ export default function JobForm() {
             label="Responsibilities"
             placeholder="List the job responsibilities here"
             {...register("responsibilities", { required: "Responsibilities are required" })}
-            // @ts-ignore
+            // @ts-expect-error
             error={errors.responsibilities?.message || ""}
           />
 

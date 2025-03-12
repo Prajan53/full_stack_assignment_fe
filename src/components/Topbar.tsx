@@ -1,5 +1,5 @@
 "use client"
-import { Box, Group, Modal, px } from "@mantine/core";
+import { Box, Group, Modal } from "@mantine/core";
 import JobForm from "./JobForm";
 import { useState } from "react";
 

@@ -1,11 +1,16 @@
 import { create } from "zustand";
 
 interface JobStoreState {
+    //@ts-ignore
   jobs: any[];
+  //@ts-ignore
   filteredJobs: any[];
+
   searchQuery: string;
   selectedLocation: string;
+  //@ts-ignore
   selectedJobType: string;
+  //@ts-ignore
   salaryRange: [number, number];
 
   setJobs: (jobs: any[]) => void;

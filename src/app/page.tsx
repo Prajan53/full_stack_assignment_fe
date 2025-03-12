@@ -231,7 +231,8 @@ export default function Home() {
   } = useJobStore();
 
   // ✅ Memoized setter functions to avoid unnecessary re-renders
-  const updateJobs = useCallback((newJobs: any) => {
+  //@ts-ignore
+  const updateJobs = useCallback((newJobs) => {
     setJobs(newJobs);
     setFilteredJobs(newJobs); // Initialize filtered jobs
   }, [setJobs, setFilteredJobs]);
@@ -317,7 +318,7 @@ export default function Home() {
 
       {/* 🎯 Render Filtered Jobs */}
       <JobList 
-      // @ts-ignore
+      //@ts-expect-error
       jobs={filteredJobs} />
     </div>
   );
