@@ -241,7 +241,13 @@ export default function Home() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get("https://admin-inf-k9oa7xfnz-prajan-ss-projects.vercel.app/jobs");
+        const response = await axios.get("https://admin-inf-k9oa7xfnz-prajan-ss-projects.vercel.app/jobs", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, // Important if using cookies or authentication
+        });
+      
         if (response.data && response.data.jobs) {
           updateJobs(response.data.jobs);
         }

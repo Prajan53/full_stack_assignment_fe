@@ -363,9 +363,16 @@ export default function JobForm() {
 
     try {
       console.log(jobData);
-      const response = await axios.post("https://admin-inf-k9oa7xfnz-prajan-ss-projects.vercel.app/jobs", jobData, {
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await axios.post(
+        "https://admin-inf-k9oa7xfnz-prajan-ss-projects.vercel.app/jobs",
+        jobData,
+        {
+          headers: {
+            "Content-Type": "application/json"
+          },
+          withCredentials: true, // Required if using cookies/session-based auth
+        }
+      );
 
       console.log("Job Created:", response.data);
       setOpened(false);
