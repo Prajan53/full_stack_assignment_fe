@@ -274,9 +274,15 @@ export default function Home() {
     }
 
     // 🏢 Job Type Filter
+    // if (selectedJobType) {
+    //   updatedJobs = updatedJobs.filter((job) => job.jobType === selectedJobType);
+    // }
     if (selectedJobType) {
-      updatedJobs = updatedJobs.filter((job) => job.jobType === selectedJobType);
+      updatedJobs = updatedJobs.filter(
+        (job) => job.jobType === selectedJobType.toUpperCase()
+      );
     }
+    
 
     // 💰 Salary Filter (Ensuring proper parsing)
     updatedJobs = updatedJobs.filter((job) => {

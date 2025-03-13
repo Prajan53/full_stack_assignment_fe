@@ -82,7 +82,7 @@
 import { Select } from "@mantine/core";
 import { useJobStore } from "@/store/useJobStore";
 
-const jobTypes = ["Full-time", "Part-time", "Contract", "Internship"];
+const jobTypes = ["Full_time", "Part_time", "Contract", "Internship"];
 
 export default function JobType() {
   const { selectedJobType, setSelectedJobType } = useJobStore();
