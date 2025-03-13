@@ -364,7 +364,7 @@ export default function JobForm() {
     try {
       console.log(jobData);
       const response = await axios.post(
-        "https://admin-inf-k9oa7xfnz-prajan-ss-projects.vercel.app/jobs",
+        "https://admin-inf-be.vercel.app/jobs",
         jobData,
         {
           headers: {

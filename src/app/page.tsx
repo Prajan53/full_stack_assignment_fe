@@ -241,7 +241,7 @@ export default function Home() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get("https://admin-inf-k9oa7xfnz-prajan-ss-projects.vercel.app/jobs", {
+        const response = await axios.get("https://admin-inf-be.vercel.app/jobs", {
           headers: {
             "Content-Type": "application/json",
           },
