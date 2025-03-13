@@ -199,6 +199,79 @@
 //   );
 // }
 
+// "use client";
+// import { useEffect } from "react";
+// import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
+// import { IconBriefcase, IconMapPin, IconCoins } from "@tabler/icons-react";
+// import { useJobStore } from "@/store/useJobStore";
+// import dayjs from "dayjs";
+// import relativeTime from "dayjs/plugin/relativeTime";
+
+// dayjs.extend(relativeTime);
+
+
+
+// export default function JobList() {
+//   const { filteredJobs, jobs } = useJobStore();
+
+//   useEffect(() => {
+//     console.log("Available Jobs:", jobs);
+//     console.log("Filtered Jobs:", filteredJobs);
+//   }, [jobs, filteredJobs]);
+
+//   if (!filteredJobs || filteredJobs.length === 0) {
+//     return (
+//       <Text mt="10" className="text-gray-500">
+//         No jobs found matching the selected filters.
+//       </Text>
+//     );
+//   }
+
+//   return (
+//     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 p-5">
+//       {filteredJobs.map((job) => (
+//         <Card key={job.id} shadow="md" padding="lg" radius="md" withBorder className="relative w-full max-w-xs">
+//           {/* Time Badge */}
+//           <Badge color="blue" variant="light" radius="md" className="absolute top-3 right-3">
+//             {dayjs(job.createdAt).fromNow()}
+//           </Badge>
+
+//           {/* Company Logo Placeholder */}
+//           <Group mt="sm">
+//             <div className="w-[50px] h-[50px] flex items-center justify-center rounded-lg bg-gray-100">
+              
+//               <Image src="Tesla.png" width={30} height={30} alt={`${job.companyName} Logo`} />
+//             </div>
+//           </Group>
+
+//           {/* Job Title */}
+//           <Text fw={600} size="lg" mt="sm">
+//             {job.title}
+//           </Text>
+
+//           {/* Job Details */}
+//           <Group mt="xs">
+//             <IconBriefcase size={16} />{""}
+//             <Text size="sm">{job.jobType.replace("_", " ").toUpperCase()}</Text>
+//             <IconMapPin size={16} /> <Text size="sm">{job.location}</Text>
+//             <IconCoins size={16} /> <Text size="sm">{job.salaryRange}</Text>
+//           </Group>
+
+//           {/* Job Description */}
+//           <Text size="sm" color="dimmed" mt="md" lineClamp={2}>
+//             {job.jobDescription}
+//           </Text>
+
+//           {/* Apply Button */}
+//           <Button fullWidth mt="md" radius="md" color="blue">
+//             Apply Now
+//           </Button>
+//         </Card>
+//       ))}
+//     </div>
+//   );
+// }
+
 "use client";
 import { useEffect } from "react";
 import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
@@ -209,8 +282,6 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
-
-
 export default function JobList() {
   const { filteredJobs, jobs } = useJobStore();
 
@@ -218,6 +289,13 @@ export default function JobList() {
     console.log("Available Jobs:", jobs);
     console.log("Filtered Jobs:", filteredJobs);
   }, [jobs, filteredJobs]);
+
+  // Company logo mapping
+  const companyLogos: any = {
+    Tesla: "Tesla.png",
+    Swiggy: "swiggy.png",
+    Amazon: "amazon.png",
+  };
 
   if (!filteredJobs || filteredJobs.length === 0) {
     return (
@@ -239,8 +317,12 @@ export default function JobList() {
           {/* Company Logo Placeholder */}
           <Group mt="sm">
             <div className="w-[50px] h-[50px] flex items-center justify-center rounded-lg bg-gray-100">
-              
-              <Image src="Tesla.png" width={30} height={30} alt={`${job.companyName} Logo`} />
+              <Image 
+                src={companyLogos[job.companyName] || "swiggy.png"} 
+                width={30} 
+                height={30} 
+                alt={`${job.companyName} Logo`} 
+              />
             </div>
           </Group>
 
@@ -251,7 +333,7 @@ export default function JobList() {
 
           {/* Job Details */}
           <Group mt="xs">
-            <IconBriefcase size={16} />{""}
+            <IconBriefcase size={16} />{" "}
             <Text size="sm">{job.jobType.replace("_", " ").toUpperCase()}</Text>
             <IconMapPin size={16} /> <Text size="sm">{job.location}</Text>
             <IconCoins size={16} /> <Text size="sm">{job.salaryRange}</Text>
@@ -271,6 +353,7 @@ export default function JobList() {
     </div>
   );
 }
+
 
 
 

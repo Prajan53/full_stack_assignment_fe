@@ -1,42 +1,67 @@
-"use client"
-import { Box, Group, Modal } from "@mantine/core";
+"use client";
+import { Box, Group, Modal, Drawer, Burger } from "@mantine/core";
 import JobForm from "./JobForm";
 import { useState } from "react";
 
 export function Topbar() {
   const [jobModalOpened, setJobModalOpened] = useState(false);
+  const [mobileMenuOpened, setMobileMenuOpened] = useState(false);
 
   return (
-    <div className="flex items-center rounded-4xl drop-shadow-2xl shadow-md justify-center border-gray-100 border mt-5 px-4 w-fit mx-44">
-      <Box p={10}>
-        <header className="h-12 border-gray-300 dark:border-gray-700 flex items-center justify-between">
-          <img src='logo.svg' className="pr-5" width={44} height={44.68}/>
+    <div className="flex items-center rounded-4xl drop-shadow-2xl shadow-md justify-between border-gray-100 border mt-5 px-4 w-full max-w-6xl mx-auto">
+      <Box p={10} className="w-full">
+        <header className="h-16 flex items-center justify-between">
+          {/* Logo */}
+          <img src="logo.svg" className="pr-5" width={44} height={44.68} />
 
-          <Group className="hidden sm:flex gap-4 text-sm">
-            <a href="#" className="text-[#303030] font-medium px-4 py-2 rounded-md">Home</a>
-            <a href="#" className="text-[#303030] font-medium px-4 py-2 rounded-md">Find Jobs</a>
-            <a href="#" className="text-[#303030] font-medium px-4 py-2 rounded-md">Find Talents</a>
-            <a href="#" className="text-[#303030] font-medium px-4 py-2 rounded-md">About us</a>
-            <a href="#" className="text-[#303030] font-medium px-4 py-2 rounded-md">Testimonials</a>
-
-            {/* Create Jobs Button */}
-            <button 
-              onClick={() => setJobModalOpened(true)} 
-              className="bg-gradient-to-b from-[#A128FF] to-[#6100AD] text-white py-[8px] px-[24px] rounded-3xl"
+          {/* Desktop Navigation */}
+          <Group className="hidden md:flex gap-6 text-sm">
+            {["Home", "Find Jobs", "Find Talents", "About us", "Testimonials"].map((item) => (
+              <a href="#" key={item} className="text-[#303030] font-medium px-4 py-2 rounded-md">
+                {item}
+              </a>
+            ))}
+            <button
+              onClick={() => setJobModalOpened(true)}
+              className="bg-gradient-to-b from-[#A128FF] to-[#6100AD] text-white py-2 px-6 rounded-3xl"
             >
               Create Jobs
             </button>
           </Group>
+
+          {/* Mobile Menu Toggle */}
+          <Burger opened={mobileMenuOpened} onClick={() => setMobileMenuOpened(!mobileMenuOpened)} className="md:hidden" />
         </header>
       </Box>
 
-      {/* JobForm Modal */}
-      <Modal
-        opened={jobModalOpened}
-        onClose={() => setJobModalOpened(false)}
-        title="Publish a Job"
-        size="lg"
+      {/* Mobile Drawer Menu */}
+      <Drawer
+        opened={mobileMenuOpened}
+        onClose={() => setMobileMenuOpened(false)}
+        title="Menu"
+        padding="md"
+        size="75%"
       >
+        <div className="flex flex-col gap-5">
+          {["Home", "Find Jobs", "Find Talents", "About us", "Testimonials"].map((item) => (
+            <a href="#" key={item} className="text-[#303030] font-medium text-lg">
+              {item}
+            </a>
+          ))}
+          <button
+            onClick={() => {
+              setJobModalOpened(true);
+              setMobileMenuOpened(false);
+            }}
+            className="bg-gradient-to-b from-[#A128FF] to-[#6100AD] text-white py-2 px-6 rounded-3xl"
+          >
+            Create Jobs
+          </button>
+        </div>
+      </Drawer>
+
+      {/* JobForm Modal */}
+      <Modal opened={jobModalOpened} onClose={() => setJobModalOpened(false)} title="Publish a Job" size="lg">
         <JobForm />
       </Modal>
     </div>
