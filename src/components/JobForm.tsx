@@ -369,8 +369,7 @@ export default function JobForm() {
         {
           headers: {
             "Content-Type": "application/json"
-          },
-          withCredentials: true, // Required if using cookies/session-based auth
+          },// Required if using cookies/session-based auth
         }
       );
 

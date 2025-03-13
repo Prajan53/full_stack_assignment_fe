@@ -244,8 +244,7 @@ export default function Home() {
         const response = await axios.get("https://admin-inf-be.vercel.app/jobs", {
           headers: {
             "Content-Type": "application/json",
-          },
-          withCredentials: true, // Important if using cookies or authentication
+          },// Important if using cookies or authentication
         });
       
         if (response.data && response.data.jobs) {
