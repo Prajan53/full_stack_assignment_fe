@@ -27,7 +27,7 @@ export const useJobStore = create<JobStoreState>((set) => ({
   searchQuery: "",
   selectedLocation: "",
   selectedJobType: "",
-  salaryRange: [0, 10000000000],
+  salaryRange: [0, 10000000],
 
   setJobs: (jobs) => set({ jobs, filteredJobs: jobs }),
   setFilteredJobs: (filteredJobs) => set({ filteredJobs }),
