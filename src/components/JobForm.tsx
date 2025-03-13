@@ -363,7 +363,7 @@ export default function JobForm() {
 
     try {
       console.log(jobData);
-      const response = await axios.post("http://localhost:3000/api/admin/jobs", jobData, {
+      const response = await axios.post("https://admin-inf-k9oa7xfnz-prajan-ss-projects.vercel.app/jobs", jobData, {
         headers: { "Content-Type": "application/json" },
       });
 

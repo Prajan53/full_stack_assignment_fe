@@ -241,7 +241,7 @@ export default function Home() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/admin/jobs");
+        const response = await axios.get("https://admin-inf-k9oa7xfnz-prajan-ss-projects.vercel.app/jobs");
         if (response.data && response.data.jobs) {
           updateJobs(response.data.jobs);
         }
