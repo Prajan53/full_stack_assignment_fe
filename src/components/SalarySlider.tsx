@@ -50,15 +50,17 @@ export default function SalarySlider() {
         step={5000} // Step of ₹5000
         value={salaryRange}
         onChange={setSalaryRange}
-        marks={[
-          { value: 0, label: "₹0" },
-          { value: 50000, label: "₹50k" },
-          { value: 100000, label: "₹1L" },
-          { value: 150000, label: "₹1.5L" },
-          { value: 200000, label: "₹2L" },
-        ]}
+        color="black"
+        size={2}
+        // marks={[
+        //   { value: 0, label: "₹0" },
+        //   { value: 250000, label: "₹50k" },
+        //   { value: 500000, label: "₹1L" },
+        //   { value: 750000, label: "₹1.5L" },
+        //   { value: 1000000, label: "₹2L" },
+        // ]}
         className="w-full"
-        thumbSize={16}
+        thumbSize={12}
       />
       {/* <p className="text-sm text-gray-600 text-center mt-2">
         Selected Range: ₹{salaryRange[0]} - ₹{salaryRange[1]}
