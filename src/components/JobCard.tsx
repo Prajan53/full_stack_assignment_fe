@@ -273,7 +273,6 @@
 // }
 
 "use client";
-import { useEffect } from "react";
 import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
 import { IconBriefcase, IconMapPin, IconCoins } from "@tabler/icons-react";
 import { useJobStore } from "@/store/useJobStore";
