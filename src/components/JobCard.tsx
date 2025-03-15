@@ -305,9 +305,9 @@ export default function JobList() {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-evenly gap-2 p-5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 p-[16px]">
       {filteredJobs.map((job) => (
-        <Card key={job.id} shadow="md" padding="lg" radius="md" withBorder className="relative w-full max-w-xs">
+        <Card key={job.id} shadow="md" padding="lg" radius="md" withBorder className="relative w-full min-w-[20vw]">
           {/* Time Badge */}
           <Badge color="blue" variant="light" radius="md" className="absolute top-3 right-3">
             {dayjs(job.createdAt).fromNow()}
