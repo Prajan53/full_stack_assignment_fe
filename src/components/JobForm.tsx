@@ -364,7 +364,7 @@ export default function JobForm() {
     try {
       console.log(jobData);
       const response = await axios.post(
-        "https://admin-inf-be.vercel.app/jobs",
+        "https://admin-inf-be-assignment.vercel.app/jobs",
         jobData,
         {
           headers: {
@@ -373,13 +373,13 @@ export default function JobForm() {
         }
       );
 
-      console.log("Job Created:", response.data);
+      // console.log("Job Created:", response.data);
       setOpened(false);
       reset();
     } catch (err) {
       //@ts-expect-error
       setError(err.response?.data?.message || "Failed to create job");
-      console.log(err);
+      // console.log(err);
     } finally {
       setLoading(false);
     }

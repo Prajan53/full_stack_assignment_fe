@@ -285,10 +285,10 @@ dayjs.extend(relativeTime);
 export default function JobList() {
   const { filteredJobs, jobs } = useJobStore();
 
-  useEffect(() => {
-    console.log("Available Jobs:", jobs);
-    console.log("Filtered Jobs:", filteredJobs);
-  }, [jobs, filteredJobs]);
+  // useEffect(() => {
+  //   console.log("Available Jobs:", jobs);
+  //   console.log("Filtered Jobs:", filteredJobs);
+  // }, [jobs, filteredJobs]);
 
   // Company logo mapping
   const companyLogos: any = {
