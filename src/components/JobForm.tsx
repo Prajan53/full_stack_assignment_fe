@@ -373,7 +373,7 @@ export default function JobForm() {
         }
       );
 
-      // console.log("Job Created:", response.data);
+      console.log("Job Created:", response.data);
       setOpened(false);
       reset();
     } catch (err) {

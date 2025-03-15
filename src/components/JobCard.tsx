@@ -282,7 +282,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
 export default function JobList() {
-  const { filteredJobs, jobs } = useJobStore();
+  const { filteredJobs } = useJobStore();
 
   // useEffect(() => {
   //   console.log("Available Jobs:", jobs);
