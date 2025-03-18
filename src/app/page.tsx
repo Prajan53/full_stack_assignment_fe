@@ -309,11 +309,11 @@ export default function Home() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         /> */}
-        <div className="flex justify-center items-center gap-4">
+        <div className="flex justify-center items-center gap-4 font-sans font-medium w-[300px]">
           <span><img src="Search.svg"/></span>
           <span>
             <input type="text" placeholder="Search By Job Title, Role" value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}/>
+              onChange={(e) => setSearchQuery(e.target.value)} className="p-2"/>
           </span>
         </div>
 
@@ -322,7 +322,7 @@ export default function Home() {
         </div>
 
         {/* 📍 Location Selector */}
-        <div className="relative w-[200px]">
+        <div className="relative w-[275px]">
           <Location />
         </div>
 
@@ -331,7 +331,7 @@ export default function Home() {
         </div>
 
         {/* 🏢 Job Type Selector */}
-        <div className="relative w-[200px]">
+        <div className="relative w-[275px]">
           <JobType />
         </div>
 
@@ -340,7 +340,7 @@ export default function Home() {
         </div>
 
         {/* 💰 Salary Range Slider */}
-        <div className="relative min-w-[300px]">
+        <div className="relative min-w-[230px] pr-2">
           <SalarySlider />
         </div>
       </div>

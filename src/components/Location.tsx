@@ -260,10 +260,10 @@ export default function Location() {
       >
         <Combobox.Target>
           <div
-            className="flex items-center justify-between cursor-pointer px-3 py-2 rounded-md text-gray-700"
+            className="flex items-center justify-between cursor-pointer px-3 py-2 rounded-md font-sans font-medium text-[#686868] text-base"
             onClick={() => combobox.openDropdown()}
           >
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-4">
               <Image src="LocationMain.svg"/>
               <span className="text-[#555555]">{selectedLocation || "Preferred Location"}</span>
             </div>

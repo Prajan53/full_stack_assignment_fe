@@ -84,7 +84,7 @@ export default function SalarySlider() {
   return (
     <div className="w-full">
       {/* Salary Label & Range */}
-      <div className="flex justify-between text-black text-sm font-medium mb-2">
+      <div className="flex justify-between text-sm font-semibold font-sans text-[#222222] mb-2">
         <span>Salary Per Month</span>
         <span>{formatSalary(salaryRange[0])} - {formatSalary(salaryRange[1])}</span>
       </div>

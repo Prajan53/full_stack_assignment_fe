@@ -132,14 +132,14 @@ export default function JobType() {
       >
         <Combobox.Target>
           <div
-            className="flex items-center justify-between cursor-pointer px-3 py-2 text-gray-700"
+            className="flex items-center justify-between cursor-pointer px-3 py-2 font-sans font-medium text-[#686868] text-base"
             onClick={() => combobox.openDropdown()}
           >
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 text-base">
               <Image src="JobType.svg"/>
               <span>{selectedJobType || "Job type"}</span>
             </div>
-            <IconChevronDown className="text-gray-500" size={18} />
+            <IconChevronDown className="" size={18} />
           </div>
         </Combobox.Target>
 

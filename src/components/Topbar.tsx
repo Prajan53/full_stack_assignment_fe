@@ -88,7 +88,7 @@ export function Topbar() {
 
           {/* Desktop Navigation (Hidden on Mobile) */}
           {!isMobile && (
-            <Group className="gap-6 text-sm">
+            <Group className="gap-6 text-base font-sans font-semibold">
               {["Home", "Find Jobs", "Find Talents", "About us", "Testimonials"].map((item) => (
                 <a href="#" key={item} className="text-[#303030] font-medium px-4 py-2 rounded-md">
                   {item}
