@@ -273,7 +273,7 @@
 // }
 
 "use client";
-import { Card, Image, Text, Badge, Button, Group, Flex, MantineProvider } from "@mantine/core";
+import { Card, Image, Text, Badge, Button, Group, Flex } from "@mantine/core";
 import { useJobStore } from "@/store/useJobStore";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
