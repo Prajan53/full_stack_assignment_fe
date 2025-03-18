@@ -324,7 +324,7 @@ export default function JobList() {
       {filteredJobs.map((job) => (
         <Card key={job.id} shadow="md" padding="lg" radius="md" className="relative w-full min-w-[20vw] min-h-[20vw-44px] text-[#555555]">
           {/* Time Badge */}
-          <Badge color="#B0D9FF" variant="filled" radius="sm" className="absolute top-3 right-3 font-sans text-sm font-medium text-black" style={{ color: "black", fontWeight: "500", textTransform: "none" }}>
+          <Badge color="#B0D9FF" variant="filled" radius="sm" className="absolute top-3 right-3 font-sans text-sm font-semibold text-black" style={{ color: "black", fontWeight: "500", textTransform: "none" }}>
             {/* {dayjs(job.createdAt).fromNow().replace(/\b\w/, (c) => c.toUpperCase())} */}
             {dayjs(job.createdAt).fromNow()
             .split(" ")
