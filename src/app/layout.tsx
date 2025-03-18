@@ -28,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en"
     suppressHydrationWarning
+    style={{backgroundColor: "#fbfbff"}}
     >
       <head>
         <ColorSchemeScript forceColorScheme="light" defaultColorScheme="light"/>

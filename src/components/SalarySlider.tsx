@@ -34,38 +34,80 @@
 //   );
 // }
 
+// "use client";
+// import { RangeSlider } from "@mantine/core";
+// import { useJobStore } from "@/store/useJobStore";
+
+// export default function SalarySlider() {
+//   const { salaryRange, setSalaryRange } = useJobStore();
+
+//   return (
+//     <div className="w-full">
+//       <p className="text-sm font-medium text-gray-700 mb-2">Selected Range: ₹{salaryRange[0]} - ₹{salaryRange[1]}</p>
+//       <RangeSlider
+//         min={0} // Min salary ₹0
+//         max={200000} // Max salary ₹2,00,000
+//         step={5000} // Step of ₹5000
+//         value={salaryRange}
+//         onChange={setSalaryRange}
+//         color="black"
+//         size={2}
+//         // marks={[
+//         //   { value: 0, label: "₹0" },
+//         //   { value: 250000, label: "₹50k" },
+//         //   { value: 500000, label: "₹1L" },
+//         //   { value: 750000, label: "₹1.5L" },
+//         //   { value: 1000000, label: "₹2L" },
+//         // ]}
+//         className="w-full"
+//         thumbSize={12}
+//       />
+//       {/* <p className="text-sm text-gray-600 text-center mt-2">
+//         Selected Range: ₹{salaryRange[0]} - ₹{salaryRange[1]}
+//       </p> */}
+//     </div>
+//   );
+// }
+
 "use client";
 import { RangeSlider } from "@mantine/core";
 import { useJobStore } from "@/store/useJobStore";
+
+// Function to format salary values
+const formatSalary = (value: number) => {
+  return value >= 100000 ? `₹${value / 100000}L` : `₹${value / 1000}k`;
+};
 
 export default function SalarySlider() {
   const { salaryRange, setSalaryRange } = useJobStore();
 
   return (
     <div className="w-full">
-      <p className="text-sm font-medium text-gray-700 mb-2">Selected Range: ₹{salaryRange[0]} - ₹{salaryRange[1]}</p>
+      {/* Salary Label & Range */}
+      <div className="flex justify-between text-black text-sm font-medium mb-2">
+        <span>Salary Per Month</span>
+        <span>{formatSalary(salaryRange[0])} - {formatSalary(salaryRange[1])}</span>
+      </div>
+
+      {/* Range Slider */}
       <RangeSlider
-        min={0} // Min salary ₹0
-        max={200000} // Max salary ₹2,00,000
-        step={5000} // Step of ₹5000
+        min={0} 
+        max={200000}
+        step={5000}
         value={salaryRange}
         onChange={setSalaryRange}
         color="black"
         size={2}
-        // marks={[
-        //   { value: 0, label: "₹0" },
-        //   { value: 250000, label: "₹50k" },
-        //   { value: 500000, label: "₹1L" },
-        //   { value: 750000, label: "₹1.5L" },
-        //   { value: 1000000, label: "₹2L" },
-        // ]}
+        thumbSize={14}
+        styles={{
+          track: { backgroundColor: "black", height: "2px" },
+          bar: { backgroundColor: "black" },
+          thumb: { borderColor: "black", backgroundColor: "white", borderWidth: "5px" },
+        }}
         className="w-full"
-        thumbSize={12}
       />
-      {/* <p className="text-sm text-gray-600 text-center mt-2">
-        Selected Range: ₹{salaryRange[0]} - ₹{salaryRange[1]}
-      </p> */}
     </div>
   );
 }
+
 

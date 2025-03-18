@@ -175,9 +175,71 @@
 //   );
 // }
 
+// "use client";
+// import { Combobox, TextInput, useCombobox } from "@mantine/core";
+// import { IconChevronDown, IconMapPin } from "@tabler/icons-react";
+// import { useJobStore } from "@/store/useJobStore";
+
+// const locations = ["Chennai", "Bangalore", "Hyderabad", "Delhi", "Mumbai"];
+
+// export default function Location() {
+//   const combobox = useCombobox();
+//   const { selectedLocation, setSelectedLocation } = useJobStore();
+
+//   return (
+//     <div className="relative w-full">
+//       <Combobox
+//         onOptionSubmit={(optionValue) => {
+//           setSelectedLocation(optionValue);
+//           combobox.closeDropdown();
+//         }}
+//         store={combobox}
+//         withinPortal
+//       >
+//         <Combobox.Target>
+//           <div className="relative">
+//             <TextInput
+//               placeholder="Preferred Location"
+//               value={selectedLocation}
+//               size="md"
+//               styles={{
+//                   input: {
+//                   textAlign: "center", // ✅ Center text
+//                   paddingLeft: "2rem", // ✅ Space for left icon
+//                   paddingRight: "2.4rem", // 🔥 Increased right padding (fixes overlap)
+//                 },
+//               }}
+//               onChange={(event) => setSelectedLocation(event.currentTarget.value)}
+//               onClick={() => combobox.openDropdown()}
+//               onFocus={() => combobox.openDropdown()}
+//               onBlur={() => combobox.closeDropdown()}
+//             />
+//             <IconMapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" size={18}/>
+//             <IconChevronDown
+//               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
+//               size={18}
+//               onClick={() => combobox.openDropdown()}
+//             />
+//           </div>
+//         </Combobox.Target>
+
+//         <Combobox.Dropdown className="absolute w-full">
+//           <Combobox.Options>
+//             {locations.map((loc) => (
+//               <Combobox.Option value={loc} key={loc}>
+//                 {loc}
+//               </Combobox.Option>
+//             ))}
+//           </Combobox.Options>
+//         </Combobox.Dropdown>
+//       </Combobox>
+//     </div>
+//   );
+// }
+
 "use client";
-import { Combobox, TextInput, useCombobox } from "@mantine/core";
-import { IconChevronDown, IconMapPin } from "@tabler/icons-react";
+import { Combobox, useCombobox, Image } from "@mantine/core";
+import { IconChevronDown } from "@tabler/icons-react";
 import { useJobStore } from "@/store/useJobStore";
 
 const locations = ["Chennai", "Bangalore", "Hyderabad", "Delhi", "Mumbai"];
@@ -197,29 +259,15 @@ export default function Location() {
         withinPortal
       >
         <Combobox.Target>
-          <div className="relative">
-            <TextInput
-              placeholder="Preferred Location"
-              value={selectedLocation}
-              size="md"
-              styles={{
-                  input: {
-                  textAlign: "center", // ✅ Center text
-                  paddingLeft: "2rem", // ✅ Space for left icon
-                  paddingRight: "2.4rem", // 🔥 Increased right padding (fixes overlap)
-                },
-              }}
-              onChange={(event) => setSelectedLocation(event.currentTarget.value)}
-              onClick={() => combobox.openDropdown()}
-              onFocus={() => combobox.openDropdown()}
-              onBlur={() => combobox.closeDropdown()}
-            />
-            <IconMapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" size={18}/>
-            <IconChevronDown
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
-              size={18}
-              onClick={() => combobox.openDropdown()}
-            />
+          <div
+            className="flex items-center justify-between cursor-pointer px-3 py-2 rounded-md text-gray-700"
+            onClick={() => combobox.openDropdown()}
+          >
+            <div className="flex items-center gap-2">
+              <Image src="LocationMain.svg"/>
+              <span className="text-[#555555]">{selectedLocation || "Preferred Location"}</span>
+            </div>
+            <IconChevronDown className="text-gray-500" size={18} />
           </div>
         </Combobox.Target>
 
@@ -236,4 +284,5 @@ export default function Location() {
     </div>
   );
 }
+
 

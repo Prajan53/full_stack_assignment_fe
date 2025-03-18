@@ -212,8 +212,6 @@ import JobType from "@/components/JobType";
 import Location from "@/components/Location";
 import SalarySlider from "@/components/SalarySlider";
 import { Topbar } from "@/components/Topbar";
-import { Input } from "@mantine/core";
-import { IconSearch } from "@tabler/icons-react";
 import JobList from "@/components/JobCard";
 import { useJobStore } from "@/store/useJobStore";
 
@@ -299,21 +297,36 @@ export default function Home() {
   }, [searchQuery, selectedLocation, selectedJobType, salaryRange, jobs]);
 
   return (
-    <div>
+    <div className="bg-[#fbfbff]">
+      <div className="">
       <Topbar />
-      <div className="flex flex-wrap justify-around items-center gap-4 my-4 ">
+      <div className="flex flex-wrap justify-around items-center gap-4 my-4 shadow-md pb-2 mb-5">
         {/* 🔍 Search Input */}
-        <Input
+        {/* <Input
           className="flex items-center flex-grow max-w-[400px]"
           placeholder="Search By Job Title, Role"
-          leftSection={<IconSearch className="text-gray-600" />}
+          leftSection={<Image src="Search.svg"/>}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-        />
+        /> */}
+        <div className="flex justify-center items-center gap-4">
+          <span><img src="Search.svg"/></span>
+          <span>
+            <input type="text" placeholder="Search By Job Title, Role"/>
+          </span>
+        </div>
+
+        <div>
+          <img src="Vector 1.svg"/>
+        </div>
 
         {/* 📍 Location Selector */}
         <div className="relative w-[200px]">
           <Location />
+        </div>
+
+        <div>
+          <img src="Vector 1.svg"/>
         </div>
 
         {/* 🏢 Job Type Selector */}
@@ -321,10 +334,15 @@ export default function Home() {
           <JobType />
         </div>
 
+        <div>
+          <img src="Vector 1.svg"/>
+        </div>
+
         {/* 💰 Salary Range Slider */}
         <div className="relative min-w-[300px]">
           <SalarySlider />
         </div>
+      </div>
       </div>
 
       {/* 🎯 Render Filtered Jobs */}

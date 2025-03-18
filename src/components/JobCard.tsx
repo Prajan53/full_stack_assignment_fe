@@ -273,16 +273,31 @@
 // }
 
 "use client";
-import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
-import { IconBriefcase, IconMapPin, IconCoins } from "@tabler/icons-react";
+import { Card, Image, Text, Badge, Button, Group, Flex, MantineProvider } from "@mantine/core";
 import { useJobStore } from "@/store/useJobStore";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
+
 export default function JobList() {
   const { filteredJobs } = useJobStore();
+
+  const formatSalary = (salaryRange: any) => {
+    if (!salaryRange) return "";
+  
+    // Remove currency symbols and split by " - "
+    const values = salaryRange.replace(/[^\d\s-]/g, "").split(" - ").map(Number);
+    
+    if (values.length < 2 || isNaN(values[1])) return salaryRange; // Return original if format is unexpected
+  
+    // Convert second value to LPA
+    const secondValueLPA = (values[1] / 100000).toFixed(1) + " LPA";
+    
+    return secondValueLPA;
+  };
+  
 
   // useEffect(() => {
   //   console.log("Available Jobs:", jobs);
@@ -305,11 +320,11 @@ export default function JobList() {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-[16px] md:px-[64px] md:py-[16px]">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-[16px] p-[16px] md:px-[64px] md:py-[16px]">
       {filteredJobs.map((job) => (
-        <Card key={job.id} shadow="md" padding="lg" radius="md" withBorder className="relative w-full min-w-[20vw] min-h-[20vw-44px]">
+        <Card key={job.id} shadow="md" padding="lg" radius="md" className="relative w-full min-w-[20vw] min-h-[20vw-44px] text-[#555555]">
           {/* Time Badge */}
-          <Badge color="blue" variant="light" radius="md" className="absolute top-3 right-3">
+          <Badge color="#B0D9FF" variant="filled" radius="sm" className="absolute top-3 right-3" style={{ color: "black", fontWeight: "500" }}>
             {dayjs(job.createdAt).fromNow()}
           </Badge>
 
@@ -331,20 +346,42 @@ export default function JobList() {
           </Text>
 
           {/* Job Details */}
-          <Group mt="xs">
-            <IconBriefcase size={16} />{" "}
+          {/* <Group mt="xs">
+            <IconBriefcase size={16} />
             <Text size="sm">{job.jobType.replace("_", " ").toUpperCase()}</Text>
             <IconMapPin size={16} /> <Text size="sm">{job.location}</Text>
             <IconCoins size={16} /> <Text size="sm">{job.salaryRange}</Text>
+          </Group> */}
+
+          <Group mt="xs" gap="sm"> 
+            <Flex align="center" gap="2px">
+              <Image src="ExpIcon.svg" />
+              <Text size="sm" color="#555555" className="font-semibold">{job.jobType.replace("_", " ").toUpperCase()}</Text>
+            </Flex>
+            <Flex align="center" gap="2px">
+              <Image src="Location.svg" />
+              <Text size="sm" color="#555555" className="font-semibold">{job.location}</Text>
+            </Flex>
+            <Flex align="center" gap="2px">
+            <Image src="Salary.svg"/>
+              <Text size="sm" color="#555555" className="font-semibold">
+                {formatSalary(job.salaryRange)}
+              </Text>
+            </Flex>
           </Group>
 
           {/* Job Description */}
-          <Text size="sm" color="dimmed" mt="md" lineClamp={2}>
+          {/* <Text size="sm" color="dimmed" mt="md" lineClamp={2}>
             {job.jobDescription}
-          </Text>
+          </Text> */}
+        <ul className="list-disc pl-5 text-gray-600 text-xs mt-2">
+          {job.jobDescription.split("\n").map((point: string, index: number) => (
+            <li key={index}>{point}</li>
+          ))}
+        </ul>
 
           {/* Apply Button */}
-          <Button fullWidth mt="md" radius="md" color="blue">
+          <Button fullWidth mt="md" radius="md" style={{ backgroundColor: "#00AAFF", boxShadow: "0px 0px 14px 0px #5D5D5D26" }}>
             Apply Now
           </Button>
         </Card>
