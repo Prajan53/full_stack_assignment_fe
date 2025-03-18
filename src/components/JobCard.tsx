@@ -324,13 +324,17 @@ export default function JobList() {
       {filteredJobs.map((job) => (
         <Card key={job.id} shadow="md" padding="lg" radius="md" className="relative w-full min-w-[20vw] min-h-[20vw-44px] text-[#555555]">
           {/* Time Badge */}
-          <Badge color="#B0D9FF" variant="filled" radius="sm" className="absolute top-3 right-3" style={{ color: "black", fontWeight: "500" }}>
-            {dayjs(job.createdAt).fromNow()}
+          <Badge color="#B0D9FF" variant="filled" radius="sm" className="absolute top-3 right-3 font-sans text-sm font-medium" style={{ color: "black", fontWeight: "500", textTransform: "none" }}>
+            {/* {dayjs(job.createdAt).fromNow().replace(/\b\w/, (c) => c.toUpperCase())} */}
+            {dayjs(job.createdAt).fromNow()
+            .split(" ")
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+            .join(" ")}
           </Badge>
 
           {/* Company Logo Placeholder */}
           <Group mt="sm">
-            <div className="w-[50px] h-[50px] flex items-center justify-center rounded-lg bg-gray-100">
+            <div className="w-[50px] h-[50px] flex items-center justify-center rounded-lg bg-gray-100 ">
               <Image 
                 src={companyLogos[job.companyName] || "swiggy.png"} 
                 width={30} 
@@ -341,7 +345,7 @@ export default function JobList() {
           </Group>
 
           {/* Job Title */}
-          <Text fw={600} size="lg" mt="sm">
+          <Text fw={700} className="font-sans" size="lg" mt="sm">
             {job.title}
           </Text>
 
@@ -354,17 +358,17 @@ export default function JobList() {
           </Group> */}
 
           <Group mt="xs" gap="sm"> 
-            <Flex align="center" gap="2px">
+            <Flex align="center" gap="3px" className="items-center">
               <Image src="ExpIcon.svg" />
-              <Text size="sm" color="#555555" className="font-semibold">{job.jobType.replace("_", " ").toUpperCase()}</Text>
+              <Text size="sm" color="#555555" className="font-medium font-sans text-base">{job.jobType.replace("_", " ").toUpperCase()}</Text>
             </Flex>
-            <Flex align="center" gap="2px">
+            <Flex align="center" gap="3px" className="items-center">
               <Image src="Location.svg" />
-              <Text size="sm" color="#555555" className="font-semibold">{job.location}</Text>
+              <Text size="sm" color="#555555" className="font-medium font-sans text-base">{job.location}</Text>
             </Flex>
-            <Flex align="center" gap="2px">
+            <Flex align="center" gap="3px" className="items-center">
             <Image src="Salary.svg"/>
-              <Text size="sm" color="#555555" className="font-semibold">
+              <Text size="sm" color="#555555" className="font-medium font-sans text-base">
                 {formatSalary(job.salaryRange)}
               </Text>
             </Flex>
@@ -374,14 +378,14 @@ export default function JobList() {
           {/* <Text size="sm" color="dimmed" mt="md" lineClamp={2}>
             {job.jobDescription}
           </Text> */}
-        <ul className="list-disc pl-5 text-gray-600 text-xs mt-2">
+        <ul className="list-disc pl-5 font-sans font-medium text-xs text-[#555555] mt-2">
           {job.jobDescription.split("\n").map((point: string, index: number) => (
             <li key={index}>{point}</li>
           ))}
         </ul>
 
           {/* Apply Button */}
-          <Button fullWidth mt="md" radius="md" style={{ backgroundColor: "#00AAFF", boxShadow: "0px 0px 14px 0px #5D5D5D26" }}>
+          <Button fullWidth mt="md" radius="md" className="font-sans font-semibold text-base" style={{ backgroundColor: "#00AAFF", boxShadow: "0px 0px 14px 0px #5D5D5D26" }}>
             Apply Now
           </Button>
         </Card>
