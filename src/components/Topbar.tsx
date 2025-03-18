@@ -80,7 +80,7 @@ export function Topbar() {
   const isMobile = useMediaQuery("(max-width: 768px)"); // Mantine's md breakpoint
 
   return (
-    <div className="flex items-center rounded-4xl drop-shadow-2xl shadow-md justify-between border-gray-100 border mt-5 px-4 w-fit max-w-6xl md:mx-auto">
+    <div className="flex items-center rounded-full drop-shadow-2xl shadow-md justify-between border-gray-100 border mt-5 px-4 w-fit max-w-6xl md:mx-auto">
       <Box p={10} className="w-full">
         <header className={`h-16 flex items-center ${isMobile ? "justify-evenly" : "justify-between"}`}>
           {/* Logo */}
