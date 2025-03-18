@@ -312,7 +312,8 @@ export default function Home() {
         <div className="flex justify-center items-center gap-4">
           <span><img src="Search.svg"/></span>
           <span>
-            <input type="text" placeholder="Search By Job Title, Role"/>
+            <input type="text" placeholder="Search By Job Title, Role" value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}/>
           </span>
         </div>
 
