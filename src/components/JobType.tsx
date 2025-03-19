@@ -114,7 +114,7 @@ import { Combobox, useCombobox, Image } from "@mantine/core";
 import { IconChevronDown } from "@tabler/icons-react";
 import { useJobStore } from "@/store/useJobStore";
 
-const jobTypes = ["Full-time", "Part-time", "Contract", "Internship"];
+const jobTypes = ["Full_time", "Part_time", "Contract", "Internship"];
 
 export default function JobType() {
   const combobox = useCombobox();
