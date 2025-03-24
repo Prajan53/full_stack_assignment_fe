@@ -228,14 +228,12 @@ export default function Home() {
     setSearchQuery,
   } = useJobStore();
 
-  // ✅ Memoized setter functions to avoid unnecessary re-renders
   //@ts-ignore
   const updateJobs = useCallback((newJobs) => {
     setJobs(newJobs);
     setFilteredJobs(newJobs); // Initialize filtered jobs
   }, [setJobs, setFilteredJobs]);
 
-  // ✅ Fetch jobs only once on mount
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -255,26 +253,20 @@ export default function Home() {
     fetchJobs();
   }, [updateJobs]);
 
-  // ✅ Filter jobs whenever state changes
   useEffect(() => {
     let updatedJobs = [...jobs];
 
-    // 🔍 Search Filter
     if (searchQuery.trim()) {
       updatedJobs = updatedJobs.filter((job) =>
         job.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
-    // 📍 Location Filter
     if (selectedLocation) {
       updatedJobs = updatedJobs.filter((job) => job.location === selectedLocation);
     }
 
-    // 🏢 Job Type Filter
-    // if (selectedJobType) {
-    //   updatedJobs = updatedJobs.filter((job) => job.jobType === selectedJobType);
-    // }
+    
     if (selectedJobType) {
       updatedJobs = updatedJobs.filter(
         (job) => job.jobType === selectedJobType.toUpperCase()
@@ -282,7 +274,6 @@ export default function Home() {
     }
     
 
-    // 💰 Salary Filter (Ensuring proper parsing)
     updatedJobs = updatedJobs.filter((job) => {
       const salaryNumbers = job.salaryRange.match(/\d+/g); // Extract numbers
       if (!salaryNumbers) return false; // Skip invalid salary formats
@@ -301,14 +292,7 @@ export default function Home() {
       <div className="">
       <Topbar />
       <div className="flex flex-wrap justify-around items-center gap-4 my-4 shadow-md pb-2 mb-5">
-        {/* 🔍 Search Input */}
-        {/* <Input
-          className="flex items-center flex-grow max-w-[400px]"
-          placeholder="Search By Job Title, Role"
-          leftSection={<Image src="Search.svg"/>}
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        /> */}
+        
         <div className="flex justify-center items-center gap-4 font-sans font-medium w-[300px]">
           <span><img src="Search.svg"/></span>
           <span>
@@ -320,8 +304,6 @@ export default function Home() {
         <div>
           <img src="Vector 1.svg"/>
         </div>
-
-        {/* 📍 Location Selector */}
         <div className="relative w-[275px]">
           <Location />
         </div>
@@ -330,7 +312,6 @@ export default function Home() {
           <img src="Vector 1.svg"/>
         </div>
 
-        {/* 🏢 Job Type Selector */}
         <div className="relative w-[275px]">
           <JobType />
         </div>
@@ -339,14 +320,12 @@ export default function Home() {
           <img src="Vector 1.svg"/>
         </div>
 
-        {/* 💰 Salary Range Slider */}
         <div className="relative min-w-[230px] pr-2">
           <SalarySlider />
         </div>
       </div>
       </div>
 
-      {/* 🎯 Render Filtered Jobs */}
       <JobList 
       //@ts-expect-error
       jobs={filteredJobs} />
