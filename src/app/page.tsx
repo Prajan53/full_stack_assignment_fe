@@ -218,7 +218,6 @@ import { useJobStore } from "@/store/useJobStore";
 export default function Home() {
   const {
     jobs,
-    filteredJobs,
     searchQuery,
     selectedLocation,
     selectedJobType,
