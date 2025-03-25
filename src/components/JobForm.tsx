@@ -12,7 +12,7 @@ import {
   NumberInput,
 } from "@mantine/core";
 import { useForm } from "react-hook-form";
-import { IconCurrencyRupee } from "@tabler/icons-react";
+// import { IconCurrencyRupee } from "@tabler/icons-react";
 import DatePicker from "react-date-picker";
 import axios from "axios";
 import "react-date-picker/dist/DatePicker.css";
