@@ -228,8 +228,7 @@ export default function Home() {
     setSearchQuery,
   } = useJobStore();
 
-  //@ts-ignore
-  const updateJobs = useCallback((newJobs) => {
+  const updateJobs = useCallback((newJobs: any[]) => {
     setJobs(newJobs);
     setFilteredJobs(newJobs); // Initialize filtered jobs
   }, [setJobs, setFilteredJobs]);
@@ -326,9 +325,7 @@ export default function Home() {
       </div>
       </div>
 
-      <JobList 
-      //@ts-expect-error
-      jobs={filteredJobs} />
+      <JobList  />
     </div>
   );
 }
