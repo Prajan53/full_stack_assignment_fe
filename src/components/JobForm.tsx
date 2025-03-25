@@ -17,8 +17,6 @@ import DatePicker from "react-date-picker";
 import axios from "axios";
 import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
-import { mutate } from "swr";
-import { useRouter } from "next/navigation";
 import { useJobStore } from "@/store/useJobStore";
 
 interface Job {
@@ -43,7 +41,7 @@ export default function JobForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const { setJobs, setFilteredJobs, jobs } = useJobStore();
+  const { setJobs, setFilteredJobs } = useJobStore();
 
   const {
     register,
@@ -55,8 +53,6 @@ export default function JobForm() {
 
   // Debugging: Log the form errors to check structure
   console.log("Form Errors:", errors);
-
-  const router = useRouter();
 
   const onSubmit = async (data: any) => {
     setLoading(true);
