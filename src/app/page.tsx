@@ -215,6 +215,22 @@ import { Topbar } from "@/components/Topbar";
 import JobList from "@/components/JobCard";
 import { useJobStore } from "@/store/useJobStore";
 
+interface Job {
+  id: string;
+  title: string;
+  companyName: string;
+  location: string;
+  jobType: "FULL_TIME" | "PART_TIME" | "CONTRACT" | "INTERNSHIP";
+  salaryRange: { min: number; max: number };
+  jobDescription: string;
+  requirements: string;
+  responsibilities: string;
+  applicationDeadline: string;
+  createdAt: string;
+  updatedAt: string;
+  adminId: string;
+}
+
 export default function Home() {
   const {
     jobs,
@@ -227,7 +243,7 @@ export default function Home() {
     setSearchQuery,
   } = useJobStore();
 
-  const updateJobs = useCallback((newJobs: any[]) => {
+  const updateJobs = useCallback((newJobs: Job[]) => {
     setJobs(newJobs);
     setFilteredJobs(newJobs); // Initialize filtered jobs
   }, [setJobs, setFilteredJobs]);
@@ -235,7 +251,7 @@ export default function Home() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get("https://admin-inf-be-assignment.vercel.app/jobs", {
+        const response = await axios.get<{ jobs: Job[]}>("https://admin-inf-be-assignment.vercel.app/jobs", {
           headers: {
             "Content-Type": "application/json",
           },// Important if using cookies or authentication
