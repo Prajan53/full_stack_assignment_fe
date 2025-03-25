@@ -95,8 +95,7 @@ export default function JobForm() {
               label="Job Title"
               placeholder="Full Stack Developer"
               {...register("jobTitle", { required: "Job Title is required" })}
-              //@ts-expect-error
-              error={errors.jobTitle?.message || ""}
+              error={errors.jobTitle?.message as string || undefined}
             />
             <TextInput
               label="Company Name"
