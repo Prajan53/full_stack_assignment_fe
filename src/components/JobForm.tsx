@@ -17,12 +17,33 @@ import DatePicker from "react-date-picker";
 import axios from "axios";
 import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
+import { mutate } from "swr";
+import { useRouter } from "next/navigation";
+import { useJobStore } from "@/store/useJobStore";
+
+interface Job {
+  id: string;
+  title: string;
+  companyName: string;
+  location: string;
+  jobType: "FULL_TIME" | "PART_TIME" | "CONTRACT" | "INTERNSHIP";
+  salaryRange: { min: number; max: number };
+  jobDescription: string;
+  requirements: string;
+  responsibilities: string;
+  applicationDeadline: string;
+  createdAt: string;
+  updatedAt: string;
+  adminId: string;
+}
 
 export default function JobForm() {
   const [opened, setOpened] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const { setJobs, setFilteredJobs, jobs } = useJobStore();
 
   const {
     register,
@@ -34,6 +55,8 @@ export default function JobForm() {
 
   // Debugging: Log the form errors to check structure
   console.log("Form Errors:", errors);
+
+  const router = useRouter();
 
   const onSubmit = async (data: any) => {
     setLoading(true);
@@ -66,7 +89,11 @@ export default function JobForm() {
       console.log("Job Created:", response.data);
       setOpened(false);
       reset();
-    } catch (err: any) {
+      const getResponse = await axios.get<{ jobs: Job[]}>("https://admin-inf-be-assignment.vercel.app/jobs");
+
+      setJobs(getResponse.data.jobs);
+      setFilteredJobs(getResponse.data.jobs);
+    }catch (err: any) {
       setError(err.response?.data?.message || "Failed to create job");
       // console.log(err);
     } finally {
