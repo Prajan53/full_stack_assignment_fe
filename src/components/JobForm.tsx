@@ -20,7 +20,7 @@ import "react-calendar/dist/Calendar.css";
 
 export default function JobForm() {
   const [opened, setOpened] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -45,7 +45,7 @@ export default function JobForm() {
       location: data.location || "Not specified",
       jobType: data.jobType?.toUpperCase() || "FULL-TIME",
       salaryRange: `₹${data.salaryMin || 0} - ₹${data.salaryMax || 0}`,
-      applicationDeadline: selectedDate.toISOString(),
+      applicationDeadline: selectedDate?.toISOString(),
       jobDescription: data.description,
       requirements: data.requirements,
       responsibilities: data.responsibilities,
@@ -101,8 +101,7 @@ export default function JobForm() {
               label="Company Name"
               placeholder="Amazon, Microsoft, Swiggy"
               {...register("company", { required: "Company Name is required" })}
-              //@ts-expect-error
-              error={errors.company?.message || ""}
+              error={errors.company?.message as string || undefined}
             />
           </Group>
 
@@ -113,8 +112,7 @@ export default function JobForm() {
               placeholder="Choose Preferred Location"
               data={["Remote", "Bangalore", "Chennai", "Delhi"]}
               {...register("location", { required: "Location is required" })}
-              //@ts-expect-error
-              error={errors.location?.message || ""}
+              error={errors.location?.message as string || undefined}
               onChange={(value) => setValue("location", value, { shouldValidate: true })}
             />
             <Select
@@ -122,8 +120,7 @@ export default function JobForm() {
               placeholder="Full-time"
               data={["FULL_TIME","PART_TIME","CONTRACT","INTERNSHIP"]}
               {...register("jobType", { required: "Job Type is required" })}
-              //@ts-expect-error
-              error={errors.jobType?.message || ""}
+              error={errors.jobType?.message as string || undefined}
               onChange={(value) => setValue("jobType", value, { shouldValidate: true })}
             />
           </Group>
@@ -133,20 +130,18 @@ export default function JobForm() {
             <NumberInput
               label="Min Salary"
               placeholder="₹0"
-              icon={<IconCurrencyRupee size={16} />}
+              // icon={<IconCurrencyRupee size={16} />}
               className="w-full"
               onChange={(value) => setValue("salaryMin", value || 0, { shouldValidate: true })}
-              // @ts-expect-error
-              error={errors.salaryMin?.message || ""}
+              error={errors.salaryMin?.message as string || undefined }
             />
             <NumberInput
               label="Max Salary"
               placeholder="₹12,00,000"
-              icon={<IconCurrencyRupee size={16} />}
+              // icon={<IconCurrencyRupee size={16} />}
               className="w-full"
               onChange={(value) => setValue("salaryMax", value || 0, { shouldValidate: true })}
-              // @ts-expect-error
-              error={errors.salaryMax?.message || ""}
+              error={errors.salaryMax?.message as string || undefined }
             />
 
             {/* Application Deadline Date Picker */}
@@ -155,7 +150,7 @@ export default function JobForm() {
                 Application Deadline
               </label>
               <div className="h-[50px] flex items-center">
-                <DatePicker
+                {/* <DatePicker
                   onChange={(date) => {
                     // @ts-expect-error
                     setSelectedDate(date);
@@ -171,7 +166,32 @@ export default function JobForm() {
                   minDetail="decade"
                   clearIcon={null}
                   className="w-full border rounded-md p-2"
-                />
+                /> */}
+                <DatePicker
+                    onChange={(date: Date | null | [Date | null, Date | null]) => {
+                      if (!date) {
+                        setSelectedDate(null);
+                        setValue("applicationDeadline", "", { shouldValidate: true });
+                        return;
+                      }
+
+                      if (Array.isArray(date)) {
+                        setSelectedDate(date[0]); // Use the first date if range selection is enabled
+                        setValue("applicationDeadline", date[0] ? date[0].toISOString() : "", { shouldValidate: true });
+                      } else {
+                        setSelectedDate(date);
+                        setValue("applicationDeadline", date.toISOString(), { shouldValidate: true });
+                      }
+                    }}
+                    value={selectedDate}
+                    format="y-MM-dd"
+                    showLeadingZeros
+                    // calendarType="gregory"
+                    maxDetail="month"
+                    // minDetail="decade"
+                    clearIcon={null}
+                    className="w-full border rounded-md p-2"
+                  />;
               </div>
             </div>
           </Group>
@@ -181,8 +201,7 @@ export default function JobForm() {
             label="Job Description"
             placeholder="Please share a description to let the candidate know more about the job role"
             {...register("description", { required: "Job description is required" })}
-            // @ts-expect-error
-            error={errors.description?.message || ""}
+            error={errors.description?.message as string || undefined }
           />
 
           {/* Requirements */}
@@ -190,8 +209,7 @@ export default function JobForm() {
             label="Requirements"
             placeholder="List the job requirements here"
             {...register("requirements", { required: "Requirements are required" })}
-            // @ts-expect-error
-            error={errors.requirements?.message || ""}
+            error={errors.requirements?.message as string || undefined }
           />
 
           {/* Responsibilities */}
@@ -199,8 +217,7 @@ export default function JobForm() {
             label="Responsibilities"
             placeholder="List the job responsibilities here"
             {...register("responsibilities", { required: "Responsibilities are required" })}
-            // @ts-expect-error
-            error={errors.responsibilities?.message || ""}
+            error={errors.responsibilities?.message as string || undefined }
           />
 
           {/* Error Message */}
